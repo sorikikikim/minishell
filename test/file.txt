@@ -1,0 +1,4 @@
+/Users/takim/minis/test
+a.txt
+b.txt
+file.txt
