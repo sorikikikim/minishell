@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seuyu <seuyu@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/16 18:06:01 by djeon             #+#    #+#             */
+/*   Updated: 2021/07/07 11:43:14 by mac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int				non_builtin_exec(t_cmd *cmd_list, char *argv[], char **envp, char *path, int fds[])
@@ -19,7 +31,7 @@ int				non_builtin_exec(t_cmd *cmd_list, char *argv[], char **envp, char *path, 
 		return (-1);
 	if (pid == 0) // 자식프로세스가 실행하는 부분입니다.
 	{
-		if (cmd_list->pipe_flag == 1 || cmd_list->right_flag == 0) // 현재 명령어 뒤에 실행할 명령어가 존재할 경우, 표준출력이 아닌 다음 명령어에 보내주기 위해 dup2함수를 실행합니다.
+		if (cmd_list->pipe_flag == 1 && cmd_list->right_flag == 0) // 현재 명령어 뒤에 실행할 명령어가 존재할 경우, 표준출력이 아닌 다음 명령어에 보내주기 위해 dup2함수를 실행합니다.
 			dup2(fds[1], 1);
 		if (execve(path, argv, envp) == -1) // 자식프로세스는 path에 해당하는 프로그램을 실행시킨 후에 프로세스를 종료시킵니다.
 			return (-1);
@@ -95,7 +107,7 @@ int				non_builtin(t_cmd *cmd_list, char *argv[], char **envp, int fds[])
 		free(paths);
 	}
 	if (flag == 0 && cmd_list->cmdline[0].redir_flag != 1)
-	{ 
+	{
 		free(buf);
 		return (0);
 	}
@@ -108,12 +120,12 @@ int				exec_function(t_cmd *cmd_list, char *argv[], char **envp[], int fds[])
 	int			fd;
 
 	cmd_list->right_flag = 0;
-	if (redir_err_chk(cmd_list) == -1)//redirection 형식을 체크 예를들어서, <,<<,>>,> >>>
+	if (redir_err_chk(cmd_list) == -1)
 		return (-1);
-	if ((cmd_list->right_flag = redirect_check(cmd_list, &fds)) == -1) // redirect가 필요한 노드일 경우, redirect 되는지 실험. redirect 가능 조건
-		return (-1);													//1.<(file명) <<(eof)   2. 파일이 open 가능해야함.
+	if ((cmd_list->right_flag = redirect_check(cmd_list, &fds)) == -1) // redirect가 필요한 노드일 경우, redirect 함수를 실행합니다.
+		return (-1);
 	if (cmd_list->pipe_flag == 1 && cmd_list->right_flag == 0) // pipe_flag가 설정되어 list의 다음 노드가 존재하고 redirection 출력기호가 없을 때, 현재 노드의 출력은 표준출력이 아닌 다음 노드로 넘겨줘야 하므로 fd에 파이프의 입력fd를 넣어줍니다. 그렇지 않을경우, 표준출력 fd인 1을 fd에 넣어줍니다.
-		fd = fds[1];//redirection 없는 경우인데 다음에 pipeflag가 있는 경우 //문제 있는 거같다 stdout 바뀌지 않은 다른 경우에 대해서도 fds[1] 바꾸어 주어야함.
+		fd = fds[1];
 	else
 		fd = 1;
 	if (ft_strncmp("pwd", cmd_list->cmdline[0].cmd, 4) == 0) // 명령어는 커맨드라인의 처음부분에만 올 수 있으므로 cmdline의 첫번째 index를 과제에서 구현해야하는 명령어와 비교하여 일치할 시, 조건문의 함수를 실행합니다.

@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int			check_whitespace(char *line)
+int	check_whitespace(char *line)
 {
 	int		i;
 
@@ -14,7 +14,7 @@ int			check_whitespace(char *line)
 	return (1);
 }
 
-char		*strjoin_path(char const *s1, char const *s2)
+char	*strjoin_path(char const *s1, char const *s2)
 {
 	char	*tmp1;
 	char	*tmp2;
@@ -22,11 +22,12 @@ char		*strjoin_path(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	tmp1 = (char*)s1;
-	tmp2 = (char*)s2;
+	tmp1 = (char *)s1;
+	tmp2 = (char *)s2;
 	i = 0;
 	j = 0;
-	if (!(result = (char*)malloc(ft_strlen(tmp1) + ft_strlen(tmp2) + 2)))
+	result = (char *)malloc(ft_strlen(tmp1) + ft_strlen(tmp2) + 2);
+	if (!(result))
 		return (0);
 	while (tmp1[i] != '\0')
 	{
@@ -40,7 +41,7 @@ char		*strjoin_path(char const *s1, char const *s2)
 	return (result);
 }
 
-void			free_list(t_cmd *cmd_list)
+void	free_list(t_cmd *cmd_list)
 {
 	t_cmd		*tmp;
 	int			i;
@@ -64,11 +65,12 @@ void			free_list(t_cmd *cmd_list)
 	free(cmd_list);
 }
 
-t_cmd			*ft_new(char *line, int pipe_flag, char **envp, int exit_flag)
+t_cmd	*ft_new(char *line, int pipe_flag, char **envp, int exit_flag)
 {
 	t_cmd		*result;
 
-	if (!(result = (t_cmd*)malloc(sizeof(t_cmd))))
+	result = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!(result))
 		return (NULL);
 	result->cmdline = cmd_split(line, ' ');
 	ft_alloc_token(result->cmdline, envp);
@@ -84,12 +86,12 @@ t_cmd			*ft_new(char *line, int pipe_flag, char **envp, int exit_flag)
 	return (result);
 }
 
-void			str_forward(char *line, int *i)
+void	str_forward(char *line, int *i)
 {
-	int j;
+	int	j;
 
 	j = 0;
-	while(line[(*i) + j])
+	while (line[(*i) + j])
 	{
 		line[(*i) + j] = line[(*i) + j + 1];
 		j++;
@@ -97,67 +99,3 @@ void			str_forward(char *line, int *i)
 	(*i)--;
 }
 
-char			check_quote(char *line)
-{
-	char		result;
-	int			i;
-
-	i = 0;
-	result = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] == '"' && (result == 0 || result == '"'))
-		{
-			if (result == '"')
-				result = 0;
-			else
-				result = '"';
-			str_forward(line, &i);
-		}
-		else if (line[i] == '\'' && (result == 0 || result == '\''))
-		{
-			if (result == '\'')
-				result = 0;
-			else
-				result = '\'';
-			str_forward(line, &i);
-		}
-		i++;
-	}
-	return (result);
-}
-
-long long		ft_atoi_chk_overflow(const char *str, int *err_flag)
-{
-	int				i;
-	int				mark;
-	long long		result;
-
-	i = 0;
-	mark = 1;
-	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			mark = -1;
-		i++;
-	}
-	while (str[i] != '\0')
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			result = result * 10 + (str[i] - '0');
-		else
-			break ;
-		i++;
-	}
-	if (result < 0)
-		*err_flag = 1;
-	if (mark == -1 && result == (-9223372036854775807 - 1))
-	{
-		*err_flag = 0;
-		return (result);
-	}
-	return (mark * result);
-}

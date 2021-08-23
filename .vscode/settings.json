@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"cmd_split.h": "c",
+		"get_parse_size.h": "c"
+	}
+}

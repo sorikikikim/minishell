@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seuyu <seuyu@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/16 16:37:25 by hoylee            #+#    #+#             */
+/*   Updated: 2021/07/07 20:18:04 by seuyu            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int		ft_cd(t_cmd *cmd_list)
@@ -20,7 +32,7 @@ int		ft_cd(t_cmd *cmd_list)
 		if(cmd_list->cmdline[1].cmd[1] == '/')
 		{
 			tmp = cmd_list->cmdline[1].cmd; 
-			cmd_list -> cmdline[1].cmd = ft_strjoin(getenv("HOME"), &cmd_list->cmdline[1].cmd[1]);//절대경로 만듬
+			cmd_list -> cmdline[1].cmd = ft_strjoin(getenv("HOME"), &cmd_list->cmdline[1].cmd[1]);
 			free(tmp);
 		}
 		else if(cmd_list->cmdline[1].cmd[1] == 0)

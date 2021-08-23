@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoylee <hoylee@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 16:36:03 by hoylee            #+#    #+#             */
+/*   Updated: 2021/07/07 11:43:28 by mac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int				left_redirect(t_cmd *cmd_list, int *last_index)
@@ -71,7 +83,7 @@ int		redirect(t_cmd *cmd_list, int **fds, int *last_index)
 	if (error_left == -1 || error_right == -1)
 		return -1;
 	if (error_right == 1)
-		return 1;//둘다 에러가 없는경우
+		return 1;
 	return 0;
 }
 

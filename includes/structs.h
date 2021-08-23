@@ -30,4 +30,28 @@ typedef struct	s_cmd
 	struct s_cmd	*next;
 }				t_cmd;
 
+typedef	struct	s_parse
+{
+	t_cmd	*tmp;
+	t_cmd	*new;
+	int		i;
+	int		start;
+	int		pipe_flag;
+	int		quote_flag;
+}	t_parse;
+
+typedef struct	s_split_cnt
+{
+	int cnt;
+	int begin;
+	int quote;
+	int redir;
+}	t_split_cnt;
+
+typedef struct	s_word_len
+{
+	int len;
+	int begin;
+	int quote;
+}	t_word_len;
 #endif

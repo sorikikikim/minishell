@@ -69,7 +69,7 @@ void			print_errstr(t_cmd *cmd_list)
 		error_write("minishell: %s: No such file or directory\n", cmd_list->cmdline[cmd_list->err_manage.errindex].cmd, 0); //status = 1
 		g_exit_status = 1;
 
-	} 
+	}
 	else if (cmd_list->err_manage.errcode == 4)
 	{
 		error_write("minishell: %s: %s: numeric argument required\n" ,cmd_list->cmdline[0].cmd, cmd_list->cmdline[cmd_list->err_manage.errindex].cmd); // status = 255

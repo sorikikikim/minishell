@@ -40,7 +40,7 @@ int		alloc_env(char *src, char **dest, char **envp)
 	env_len = ft_strlen(env_val);
 	ft_memcpy(*dest, env_val, env_len);
 	*dest += env_len;
-	free(key);
+	free(key);   
 	return (src_idx);
 }
 

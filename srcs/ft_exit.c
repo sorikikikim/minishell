@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: takim <takim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/17 14:56:10 by djeon             #+#    #+#             */
+/*   Updated: 2021/08/23 17:14:06 by takim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int				check_digit(t_cmd *cmd_list)
@@ -50,7 +62,7 @@ int				ft_exit(t_cmd *cmd_list)
 	if (cmd_list->exit_flag == 1) // 파이프가 없고 숫자인자 한개가 주어졌을 때
 	{
 		result = ft_atoi_chk_overflow(cmd_list->cmdline[1].cmd, &err_flag);
-		if (err_flag == 1)//long long 보다 큰값들어왔을때 /ft_atoi따로 정의해야함.
+		if (err_flag == 1)
 		{
 			cmd_list->err_manage.errcode = 4;
 			cmd_list->err_manage.errindex = 1;

@@ -36,7 +36,7 @@ void				print_errstr(t_cmd *cmd_list);
 //void				free_all(t_cmd *cmd_list);
 int	        		ft_echo(t_cmd *cmd_list, int fd);
 void				free_list(t_cmd *cmd_list);
-
+void				str_forward(char *line, int *i);
 // env
 int					ft_env(char **envp, int fd);
 char				**copy_envp(char **envs);

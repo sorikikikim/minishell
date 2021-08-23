@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiylee <jiylee@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/17 14:13:20 by seojeong          #+#    #+#             */
+/*   Updated: 2021/07/10 16:10:31 by seojeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void			print_quote(char *str, int fd)
@@ -99,7 +111,7 @@ int			ft_export(t_cmd *cmd_list, char ***envp, int fd)
 	{
 		if (isvalid_export(cmd_list->cmdline[i].cmd))
 		{
-			if ((keyindex = check_key(*envp, cmd_list->cmdline[i].cmd)) >= 0) //환경변수중에 key 가있는경우
+			if ((keyindex = check_key(*envp, cmd_list->cmdline[i].cmd)) >= 0)
 			{
 				if (haveequal(cmd_list->cmdline[i].cmd))
 					add_key_envp(envp, cmd_list->cmdline[i].cmd, keyindex);

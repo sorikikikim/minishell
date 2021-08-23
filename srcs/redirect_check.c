@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect_check.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoylee <hoylee@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 16:36:51 by hoylee            #+#    #+#             */
+/*   Updated: 2021/07/02 17:36:02 by mac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int		check_fd_error(t_cmd *cmd_list, int errorcode, int error_index, int fd)
@@ -35,7 +47,7 @@ int				redirect_check(t_cmd *cmd_list, int **fds)
 		else if (ft_strncmp("<", cmd_list->cmdline[i].cmd, 2) == 0 
 							|| ft_strncmp("<<", cmd_list->cmdline[i].cmd, 3) == 0)
 		{
-			if(cmd_list->cmdline[i + 1].cmd == 0)//redirection 이후에 아무 텍스트 없는 경우
+			if(cmd_list->cmdline[i + 1].cmd == 0)
 			{
 				cmd_list->err_manage.errcode = 8;
 				return (-1);
@@ -46,11 +58,11 @@ int				redirect_check(t_cmd *cmd_list, int **fds)
 				cmd_list->err_manage.errindex = i + 1;
 				return (-1);
 			}
-			save_filename(cmd_list, i, 0, 1);//left final redirection 
+			save_filename(cmd_list, i, 0, 1);
 			last_index[0] = i + 1;
 			if (ft_strncmp("<", cmd_list->cmdline[i].cmd, 2) == 0)
 			{
-				fd = open(cmd_list->cmdline[i + 1].cmd, O_WRONLY, 0744);
+				fd = open(cmd_list->cmdline[i + 1].cmd, O_WRONLY | O_APPEND, 0744);
 				if(check_fd_error(cmd_list, 3, i + 1, fd) == -1)
 					return (-1);
 				close(fd);
@@ -84,7 +96,7 @@ int				redirect_check(t_cmd *cmd_list, int **fds)
 		i++;
 	}
 	if((cmd_list->redirect_filename[0] || cmd_list->redirect_filename[2]) ? 1 : 0)
-		return (redirect(cmd_list, fds, last_index)); //redirection 이 하나라도 있는경우 그때 둘중 하나라도잘못된 경우 -1 반환
+		return (redirect(cmd_list, fds, last_index));
 	else
 		return (0);
 }
