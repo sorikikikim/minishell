@@ -1,6 +1,6 @@
 #include "../includes/get_parse_size.h"
 
-int		unclosed_quote(char *str, char quote)
+int	unclosed_quote(char *str, char quote)
 {
 	int	index;
 
@@ -12,9 +12,9 @@ int		unclosed_quote(char *str, char quote)
 	return (1);
 }
 
-int		d_quote_cnt(char *str, int *size, char **envp)
+int	d_quote_cnt(char *str, int *size, char **envp)
 {
-	int index;
+	int	index;
 
 	index = 1;
 	while (str[index] && str[index] != '\"')
@@ -32,9 +32,9 @@ int		d_quote_cnt(char *str, int *size, char **envp)
 	return (index);
 }
 
-int		s_quote_cnt(char *str, int *size)
+int	s_quote_cnt(char *str, int *size)
 {
-	int index;
+	int	index;
 
 	index = 1;
 	while (str[index] && str[index] != '\'')
@@ -45,10 +45,10 @@ int		s_quote_cnt(char *str, int *size)
 	return (index);
 }
 
-int get_parse_size(char *str, char **envp)
+int	get_parse_size(char *str, char **envp)
 {
 	int	index;
-	int size;
+	int	size;
 
 	size = 0;
 	index = -1;
@@ -63,5 +63,5 @@ int get_parse_size(char *str, char **envp)
 		else if (str[index])
 			size++;
 	}
-	return (size); //flag가 1이면 안닫힌 따옴표 에러를 의미.
+	return (size);
 }

@@ -98,4 +98,3 @@ void	str_forward(char *line, int *i)
 	}
 	(*i)--;
 }
-

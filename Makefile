@@ -21,11 +21,12 @@ SRC_DIR 	= srcs
 SRC 		= srcs/minishell.c srcs/utils.c srcs/utils2.c srcs/parse.c srcs/exec.c \
 	  	  	  srcs/error_management.c srcs/ft_cd.c srcs/ft_exit.c \
 			  srcs/ft_env.c srcs/ft_pwd.c srcs/ft_export.c srcs/export_utils.c \
-			  srcs/signal_handle.c srcs/alloc_token.c srcs/cmd_split.c srcs/ft_word_len.c \
+			  srcs/signal_handle.c srcs/alloc_token.c srcs/ft_copy_str.c srcs/cmd_split.c srcs/ft_word_len.c \
 			  srcs/ft_split_cnt.c srcs/ft_split_cnt2.c\
-			  srcs/get_parse_size.c srcs/redir_chk.c srcs/ft_getenv.c \
+			  srcs/get_parse_size.c srcs/get_parse_size2.c srcs/redir_chk.c srcs/ft_getenv.c \
 			  srcs/redirect.c srcs/redirect_check.c \
-			  srcs/ft_echo.c srcs/unset.c
+			  srcs/ft_echo.c srcs/unset.c srcs/non_builtin.c srcs/non_builtin_exec.c \
+			  srcs/error_write.c srcs/save_filename.c
 
 OBJ_DIR 	= objs
 OBJ 		= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

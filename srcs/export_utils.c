@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiylee <jiylee@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/21 16:33:34 by jiylee            #+#    #+#             */
-/*   Updated: 2021/06/29 21:27:36 by sejpark          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/minishell.h"
 
 char	**sort_env(char **envp)
@@ -39,9 +27,9 @@ char	**sort_env(char **envp)
 	return (new);
 }
 
-int		cnt_envp_row(char **envp)
+int	cnt_envp_row(char **envp)
 {
-	int row;
+	int	row;
 
 	row = 0;
 	while (envp[row])
@@ -49,26 +37,29 @@ int		cnt_envp_row(char **envp)
 	return (row);
 }
 
-int     isvalid_export(char *line)
+int	isvalid_export(char *line)
 {
-    char **str_arr = ft_split(line, '=');
-    char *key = str_arr[0];
-    int i;
-    int ret;
-    i = 0;
-    ret = ft_valid_key(key);
-    while(str_arr[i])
-    {
-        free(str_arr[i]);
-        i++;
-    }
-    free(str_arr);
-    return (ret);
+	char	**str_arr;
+	char	*key;
+	int		i;
+	int		ret;
+
+	i = 0;
+	str_arr = ft_split(line, '=');
+	key = str_arr[0];
+	ret = ft_valid_key(key);
+	while (str_arr[i])
+	{
+		free(str_arr[i]);
+		i++;
+	}
+	free(str_arr);
+	return (ret);
 }
 
-int		haveequal(char *line)
+int	haveequal(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])

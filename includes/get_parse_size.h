@@ -3,8 +3,7 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-extern int g_exit_status;
-
+extern int	g_exit_status;
 
 int		env_value_size(char *str, int size, char **envp);
 int		env_key_size(char *str);

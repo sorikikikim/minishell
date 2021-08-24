@@ -1,13 +1,14 @@
 #include "../includes/get_parse_size.h"
 
-int		env_value_size(char *str, int size, char **envp)
+int	env_value_size(char *str, int size, char **envp)
 {
-	int index;
+	int	index;
 
 	index = -1;
 	while (envp[++index])
 	{
-		if ((!ft_strncmp(&str[1], envp[index], size)) && envp[index][size] == '=')
+		if ((!ft_strncmp(&str[1], envp[index], size))
+			&& envp[index][size] == '=')
 		{
 			return (ft_strlen(envp[index] + size + 1));
 		}
@@ -15,9 +16,9 @@ int		env_value_size(char *str, int size, char **envp)
 	return (0);
 }
 
-int		env_key_size(char *str)
+int	env_key_size(char *str)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	if (ft_isdigit(str[1]))
@@ -30,10 +31,10 @@ int		env_key_size(char *str)
 	return (index - 1);
 }
 
-int		env_cnt(char *str, int *size, char **envp)
+int	env_cnt(char *str, int *size, char **envp)
 {
-	int index;
-	char *status;
+	int		index;
+	char	*status;
 
 	index = 0;
 	if (str[1] == '?')
@@ -43,7 +44,7 @@ int		env_cnt(char *str, int *size, char **envp)
 		free(status);
 		return (1);
 	}
-	if (str[1] == '\0' || str[1] == '\"')
+	if (str[1] == ' ' || str[1] == '\0' || str[1] == '\"')
 	{
 		*size += 1;
 		return (0);

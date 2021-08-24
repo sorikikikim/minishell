@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: seojeong <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 14:13:14 by seojeong          #+#    #+#             */
-/*   Updated: 2021/06/24 22:49:46 by mac              ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/minishell.h"
 
-int				ft_env(char **envp, int fd)
+int	ft_env(char **envp, int fd)
 {
 	int	i;
 
@@ -29,7 +17,7 @@ int				ft_env(char **envp, int fd)
 	return (1);
 }
 
-char			**copy_envp(char **envs)
+char	**copy_envp(char **envs)
 {
 	char	**new;
 	int		i;
@@ -37,7 +25,8 @@ char			**copy_envp(char **envs)
 	i = 0;
 	while (envs[i])
 		i++;
-	if (!(new = malloc(sizeof(char *) * (i + 1))))
+	new = malloc(sizeof(char *) * (i + 1));
+	if (!(new))
 		return (NULL);
 	i = -1;
 	while (envs[++i])

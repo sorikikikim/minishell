@@ -7,7 +7,7 @@ char	check_quote(char *line)
 
 	i = -1;
 	result = 0;
-	while (line[++i] != '\0')//원래 맨밑에 i++;
+	while (line[++i] != '\0')
 	{
 		if (line[i] == '"' && (result == 0 || result == '"'))
 		{

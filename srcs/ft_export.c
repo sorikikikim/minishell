@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiylee <jiylee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: takim <takim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:13:20 by seojeong          #+#    #+#             */
-/*   Updated: 2021/07/10 16:10:31 by seojeong         ###   ########.fr       */
+/*   Updated: 2021/08/23 23:39:05 by takim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void			print_quote(char *str, int fd)
+void	print_quote(char *str, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (haveequal(str))
@@ -34,7 +34,7 @@ void			print_quote(char *str, int fd)
 	}
 }
 
-void			print_export(char **envp, int fd)
+void	print_export(char **envp, int fd)
 {
 	int		i;
 	char	**sorted;
@@ -52,10 +52,10 @@ void			print_export(char **envp, int fd)
 	free(sorted);
 }
 
-int				check_key(char **envp, char *line)
+int	check_key(char **envp, char *line)
 {
-	int i;
-	int key;
+	int	i;
+	int	key;
 
 	i = 0;
 	key = 0;
@@ -78,7 +78,7 @@ int				check_key(char **envp, char *line)
 	return (-1);
 }
 
-int				add_envp(char *cmd, char ***envp)
+int	add_envp(char *cmd, char ***envp)
 {
 	char		**new;
 	int			row;
@@ -86,7 +86,8 @@ int				add_envp(char *cmd, char ***envp)
 
 	i = 0;
 	row = cnt_envp_row(*envp);
-	if (!(new = (char **)malloc(sizeof(char *) * (row + 2))))
+	new = (char **)malloc(sizeof(char *) * (row + 2));
+	if (!(new))
 		return (0);
 	while ((*envp)[i])
 	{
@@ -101,28 +102,27 @@ int				add_envp(char *cmd, char ***envp)
 	return (1);
 }
 
-int			ft_export(t_cmd *cmd_list, char ***envp, int fd)
+int	ft_export(t_cmd *cmd_list, char ***envp, int fd)
 {
-	int			i;
-	int 		keyindex;
+	int	i;
+	int	keyindex;
 
-	i = 1;
-	while(cmd_list->cmdline[i].cmd && cmd_list->cmdline[i].redir_flag == 0)
+	i = 0;
+	while (cmd_list->cmdline[++i].cmd && cmd_list->cmdline[i].redir_flag == 0)
 	{
 		if (isvalid_export(cmd_list->cmdline[i].cmd))
 		{
-			if ((keyindex = check_key(*envp, cmd_list->cmdline[i].cmd)) >= 0)
+			keyindex = check_key(*envp, cmd_list->cmdline[i].cmd);
+			if (keyindex >= 0)
 			{
 				if (haveequal(cmd_list->cmdline[i].cmd))
 					add_key_envp(envp, cmd_list->cmdline[i].cmd, keyindex);
-					//key가 있는데 value가 없이 들어오면 아무 처리 안해줌.
 			}
 			else
-				add_envp(cmd_list->cmdline[i].cmd, envp);//key가 없어서 새로 추가.
+				add_envp(cmd_list->cmdline[i].cmd, envp);
 		}
-		else//유효한 키가 아닐때,
+		else
 			cmd_list->err_manage.errcode = 5;
-		i++;
 	}
 	if (!(cmd_list->cmdline[1].cmd) || cmd_list->cmdline[1].redir_flag == 1)
 		print_export(*envp, fd);

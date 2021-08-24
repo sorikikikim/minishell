@@ -4,6 +4,6 @@
 # include "structs.h"
 
 int	redir_chk(char *str);
-int redir_err_chk(t_cmd *cmd_list);
+int	redir_err_chk(t_cmd *cmd_list);
 
 #endif
