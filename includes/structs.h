@@ -1,5 +1,6 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
+# include <stdio.h>
 
 # include <sys/types.h>
 

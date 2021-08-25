@@ -5,6 +5,7 @@
 # include "get_parse_size.h"
 # include "ft_getenv.h"
 # include "redir_chk.h"
+# include <stdio.h>
 
 extern int	g_exit_status;
 

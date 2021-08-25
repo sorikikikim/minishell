@@ -2,6 +2,7 @@
 # define UNSET_H
 # include "structs.h"
 # include "../libft/libft.h"
+# include <stdio.h>
 
 int	ft_valid_key(char *key);
 int	ft_unset(t_cmd *cmd_list, char **envp);
