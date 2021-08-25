@@ -1,7 +1,6 @@
 #ifndef GET_PARSE_SIZE_H
 # define GET_PARSE_SIZE_H
 # include "../libft/libft.h"
-# include <stdio.h>
 
 extern int	g_exit_status;
 

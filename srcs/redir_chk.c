@@ -1,5 +1,4 @@
 #include "../includes/redir_chk.h"
-#include <stdio.h> 
 
 int	redir_chk(char *str)
 {

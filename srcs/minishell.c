@@ -34,5 +34,6 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_putstr_fd("\x1b[1A", STDOUT);
 	ft_putstr_fd("\033[12C", STDOUT);
 	ft_putstr_fd("exit\n", STDOUT);
+	system("leaks minishell > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
 	return (0);
 }

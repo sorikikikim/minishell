@@ -28,7 +28,7 @@ int	check_digit(t_cmd *cmd_list)
 static int	ft_exit_sub(t_cmd *cmd_list)
 {
 	if (cmd_list->exit_flag == 1)
-		printf("exit\n");
+		write(1, "exit\n", 5);
 	if (cmd_list->cmdline[1].cmd != NULL)
 	{
 		if (check_digit(cmd_list) == 0)
