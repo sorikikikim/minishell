@@ -50,7 +50,7 @@ static int	file_open_test(t_cmd *cmd_list, int i)
 			fd = open(cmd_list->cmdline[i + 1].cmd,
 					O_WRONLY | O_CREAT | O_APPEND, 0744);
 		else
-			fd = -1;
+			return (0);
 		if (check_fd_error(cmd_list, 3, i + 1, fd) == -1)
 			return (-1);
 		close(fd);

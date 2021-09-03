@@ -60,5 +60,7 @@ void				error_write(char *error_str, char *err_cmdline,
 						char *err_cmdline2);
 void				save_filename(t_cmd *cmd_list,
 						int i, int first, int second);
+int					token_num(t_token *cmdline);
+void				two_free(void *p1, void *p2);
 
 #endif

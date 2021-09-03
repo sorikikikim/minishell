@@ -20,8 +20,11 @@ int	left_redirect_double(t_cmd *cmd_list, int **fds)
 	while (ft_strncmp(line, cmd_list->redirect_filename[1], 5))
 	{
 		ft_putendl_fd(line, (*fds)[1]);
+		free(line);
 		line = readline("> ");
 	}
+	if (line)
+		free(line);
 	close((*fds)[1]);
 	dup2((*fds)[0], 0);
 	close((*fds)[0]);

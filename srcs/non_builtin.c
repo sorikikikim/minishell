@@ -38,9 +38,10 @@ int	cmd_path(t_cmd *cmd_list, t_non_builtin *vars, t_argv_envp *ae, int *fds)
 		if (non_builtin_exec(cmd_list, ae,
 				cmd_list->cmdline[0].cmd, fds) == -1)
 		{
-			free(vars->buf);
+			two_free(ae->argv, vars->buf);
 			return (0);
 		}
+		free(ae->argv);
 		vars->flag = 1;
 	}
 	return (1);
@@ -63,11 +64,11 @@ static int	cmd_no_path(t_cmd *cmd_list,
 		{
 			if (non_builtin_exec(cmd_list, ae, vars->tmp, fds) == -1)
 			{
-				free(vars->buf);
+				two_free(ae->argv, vars->buf);
 				return (0);
 			}
 			vars->flag = 1;
-			free(vars->tmp);
+			two_free(ae->argv, vars->tmp);
 			break ;
 		}
 		free(vars->tmp);

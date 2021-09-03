@@ -50,7 +50,7 @@ static long long	ft_atoi_sub(const char *str, int *mark_org)
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			result = result * 10 + (str[i] - '0');
-		else
+		if (result < 0)
 			break ;
 		i++;
 	}
@@ -73,4 +73,22 @@ long long	ft_atoi_chk_overflow(const char *str, int *err_flag)
 		return (result);
 	}
 	return (mark * result);
+}
+
+int	token_num(t_token *cmdline)
+{
+	int	i;
+
+	i = 0;
+	while (cmdline[i].cmd)
+	{
+		i++;
+	}
+	return (i);
+}
+
+void	two_free(void *p1, void *p2)
+{
+	free(p1);
+	free(p2);
 }

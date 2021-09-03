@@ -1,16 +1,22 @@
 #include "../includes/minishell.h"
 
-static void	set_argv(t_cmd *cmd_list, int *i, t_argv_envp *ae, char *path)
+static char	**set_argv(t_cmd *cmd_list, int *i, char *path)
 {
+	char	**ret;
+
+	ret = (char **)malloc(sizeof(char *) * (token_num(cmd_list->cmdline) + 1));
+	if (!ret)
+		return (NULL);
 	*i = 1;
-	ae->argv[0] = path;
+	ret[0] = path;
 	while (cmd_list->cmdline[*i].cmd != NULL
 		&& cmd_list->cmdline[*i].redir_flag == 0)
 	{
-		ae->argv[*i] = cmd_list->cmdline[*i].cmd;
+		ret[*i] = cmd_list->cmdline[*i].cmd;
 		(*i)++;
 	}
-	ae->argv[*i] = NULL;
+	ret[*i] = NULL;
+	return (ret);
 }
 
 int	non_builtin_exec(t_cmd *cmd_list, t_argv_envp *ae, char *path, int fds[])
@@ -20,7 +26,7 @@ int	non_builtin_exec(t_cmd *cmd_list, t_argv_envp *ae, char *path, int fds[])
 	pid_t		wpid;
 	int			i;
 
-	set_argv(cmd_list, &i, ae, path);
+	ae->argv = set_argv(cmd_list, &i, path);
 	pid = fork();
 	if (pid < -1)
 		return (-1);
